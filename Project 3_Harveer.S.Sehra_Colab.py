@@ -40,7 +40,7 @@ image_path = f"{BASE_DIR}/motherboard_image.JPEG"
 
 image = cv2.imread(image_path)
 
-
+# Apply Grayscale
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 cv2_imshow(gray)
 
@@ -50,12 +50,14 @@ ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY+ cv2.THRESH_OTSU)
 cv2_imshow( thresh)
 # 127 is a threshold value vs the 255, white colour. It suggests what colour each pixel will be.
 
+# Canny
 edges = cv2.Canny(gray, 50, 150)
 cv2_imshow(edges)
 
+# Contour
 contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 contours_image = image.copy()
-cv2.drawContours(image, contours, -1, (0, 255, 0), 3)
+cv2.drawContours(image, contours, -1, (0, 255, 0), 3) #Green colour
 cv2_imshow(image)
 
 
